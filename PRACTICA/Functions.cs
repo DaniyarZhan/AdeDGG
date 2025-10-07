@@ -13,6 +13,7 @@ namespace PRACTICA
         changeCategory,
         infoCreateTime,
         infoCategory,
-        infoColorCategory
+        infoColorCategory,
+        changeText
     }
 }

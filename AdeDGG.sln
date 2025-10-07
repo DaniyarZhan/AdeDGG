@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35707.178 d17.12
+VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TASK_01-03_03", "TASK_01-03_03", "{5D185444-1AF3-4938-A5F0-41FD0AFA6C0A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRACTICA", "PRACTICA\PRACTICA.csproj", "{0CCD655E-68B1-4075-B2C9-EF2F2E707D11}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MDK0402", "MDK0402", "{36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAMB", "SAMB\SAMB.csproj", "{10992532-C20B-41A4-978C-D1712DF5B130}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,11 +21,19 @@ Global
 		{0CCD655E-68B1-4075-B2C9-EF2F2E707D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CCD655E-68B1-4075-B2C9-EF2F2E707D11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CCD655E-68B1-4075-B2C9-EF2F2E707D11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10992532-C20B-41A4-978C-D1712DF5B130}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10992532-C20B-41A4-978C-D1712DF5B130}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10992532-C20B-41A4-978C-D1712DF5B130}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10992532-C20B-41A4-978C-D1712DF5B130}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0CCD655E-68B1-4075-B2C9-EF2F2E707D11} = {5D185444-1AF3-4938-A5F0-41FD0AFA6C0A}
+		{10992532-C20B-41A4-978C-D1712DF5B130} = {36D591C7-65C7-A0D1-1CBC-10CDE441BDC8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EA091DCE-9045-41FF-AC40-4C09852146AD}
 	EndGlobalSection
 EndGlobal

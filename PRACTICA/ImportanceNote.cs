@@ -8,8 +8,8 @@ namespace PRACTICA
 {
     enum ImportanceNote
     {
-        не_важно = 1,
-        немного_важно,
-        очень_важно
+        NotImportant = 1,
+        TypicalImportant,
+        CriticalImportant
     }
 }

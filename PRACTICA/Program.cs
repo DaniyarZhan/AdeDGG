@@ -25,32 +25,47 @@
                    $"3 - вывод заметок по времени создания\n" +
                    $"4 - вывод заметок по категориям\n" +
                    $"5 - вывод всех заметок с цветовой идентификацией: " +
-                   $"самые важные - красным цветом, менее важные - жёлтым, наименее важные - зелёным\n");
-
-                Functions functions = (Functions)Convert.ToInt32(Console.ReadLine());
-
-                switch (functions)
+                   $"самые важные - красным цветом, менее важные - жёлтым, наименее важные - зелёным\n" +
+                   $"6 - изменение текста уже существующей заметки");
+                var input = Console.ReadLine();
+                if ( input != null )
                 {
-                    case Functions.exit: //выход из приложения
-                        Note.SaveData(); //сохранение текстовых заметок
-                        return;
-                    case Functions.createText: //добавление новой заметки
-                        Note.CreateText();
-                        break;
-                    case Functions.changeCategory://изменение категории уже существующей заметки
-                        Note.ChangeCategory();
-                        break;
-                    case Functions.infoCreateTime: //вывод заметок по времени создания
-                        Note.InfoCreateTime();
-                        break;
-                    case Functions.infoCategory: //вывод заметок по категориям
-                        Note.InfoCategory();
-                        break;
-                    case Functions.infoColorCategory: //вывод всех заметок с цветовой идентификацией: самые важные - красным цветом, менее важные - жёлтым, наименее важные - зелёным
-                        Note.InfoColorCategory();
-                        break;
+                    Functions functions = (Functions)Convert.ToInt32(input);
+
+                    switch (functions)
+                    {
+                        case Functions.exit: //выход из приложения
+                            Note.SaveData(); //сохранение текстовых заметок
+                            return;
+                        case Functions.createText: //добавление новой заметки
+                            Note.CreateText();
+                            break;
+                        case Functions.changeCategory://изменение категории уже существующей заметки
+                            Note.ChangeCategory();
+
+                            break;
+                        case Functions.infoCreateTime: //вывод заметок по времени создания
+                            Note.InfoCreateTime();
+                            break;
+                        case Functions.infoCategory: //вывод заметок по категориям
+                            Note.InfoCategory();
+                            break;
+                        case Functions.infoColorCategory: //вывод всех заметок с цветовой идентификацией:
+                                                          //самые важные - красным цветом, менее важные - жёлтым, наименее важные - зелёным
+                            Note.InfoColorCategory();
+                            break;
+                        case Functions.changeText:
+                            Note.ChangeText(); 
+                            break;
+                    }
                 }
+                else
+                {
+                    Console.WriteLine("Неправильный ввод команд!");
+                }
+                
                 Console.ReadKey();
+                Console.BackgroundColor = ConsoleColor.Black;
             }
         }
     }
