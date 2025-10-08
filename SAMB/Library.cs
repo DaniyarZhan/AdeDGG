@@ -53,21 +53,11 @@ namespace SAMB
 
             //чтение данных из файла
             var data = File.ReadAllText(saveFileName);
-            try
-            {
-                //если входные данные не пустые - десериализуем в коллекцию books
-                if (!string.IsNullOrEmpty(data))
-                    books = JsonSerializer.Deserialize<List<Book>>(data);
-                else //в противном случае просто делаем новую пустую коллекцию
-                    books = new List<Book>();
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка загрузки: {ex.Message}");
-                books = new List<Book>();
-            }
-            
+            //если входные данные не пустые - десериализуем в коллекцию books
+            if (!string.IsNullOrEmpty(data))
+                books = JsonSerializer.Deserialize<List<Book>>(data);
+            else //в противном случае просто делаем новую пустую коллекцию
+                books = new List<Book>();            
         }
     }
 }

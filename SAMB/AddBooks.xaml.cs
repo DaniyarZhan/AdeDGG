@@ -20,10 +20,41 @@ namespace SAMB
     public partial class AddBooks : Window
     {
         Library library = new();
+        private User currentUser;
+
         public AddBooks()
         {
             InitializeComponent();
+
+            // Получаем текущего пользователя
+            if (Application.Current.Properties["CurrentUser"] is User user)
+            {
+                currentUser = user;
+                CheckUserPermissions();
+            }
+
             BooksListBox.ItemsSource = library.Books;
+        }
+
+        private void CheckUserPermissions()
+        {
+            Title = $"Добавление книг - {currentUser.Login} ({currentUser.Role})";
+
+            if (currentUser.IsGuest())
+            {
+                // Скрываем функционал добавления для гостя
+                NameTextBox.IsEnabled = false;
+                GenreTextBox.IsEnabled = false;
+                AuthorTextBox.IsEnabled = false;
+                DateIsdDatePicker.IsEnabled = false;
+                AddBookButton.IsEnabled = false;
+                AddBookButton.Content = "Доступно только библиотекарям";
+                AddBookButton.Background = Brushes.Gray;
+
+                // Просто показываем сообщение
+                MessageBox.Show("Режим просмотра: добавление книг доступно только библиотекарям",
+                              "Информация", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -42,6 +73,12 @@ namespace SAMB
 
         private void AddBookButton_Click(object sender, RoutedEventArgs e)
         {
+            if (currentUser != null && currentUser.IsGuest())
+            {
+                MessageBox.Show("Добавление книг доступно только библиотекарям", "Ограничение прав",
+                              MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             if (!Validate(out string errorMessage)) //если данные не прошли валидацию
             {
                 MessageBox.Show(errorMessage); //то показываем сообщение об ошибке(ах)
@@ -58,7 +95,13 @@ namespace SAMB
 
             library.AddBook(book); //вызывается метод добавления книги в библиотеку
 
-            BooksListBox.Items.Refresh(); //обновление элементов ListBox чтобы отобразить все изменения            
+            BooksListBox.Items.Refresh(); //обновление элементов ListBox чтобы отобразить все изменения
+                                          
+            // Очищаем поля после успешного добавления
+            NameTextBox.Clear();
+            GenreTextBox.Clear();
+            AuthorTextBox.Clear();
+            DateIsdDatePicker.SelectedDate = null;
         }
         #region вспомомагательные_методы
         //метод-валидатор вводимых данных

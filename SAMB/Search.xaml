@@ -5,23 +5,105 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SAMB"
         mc:Ignorable="d"
-        Title="Поисковая система" Height="450" Width="800">
-    <Grid>
+        Title="Поисковая система" MinHeight="450" MinWidth="800" MaxHeight="800" MaxWidth="1200">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <UniformGrid Grid.Row="1" Grid.Column="1" Columns="1">
-        </UniformGrid>
-        <Button x:Name="ExitButton" Content="Вернуться на прошлую страницу" Click="ExitButton_Click"
-            Grid.Column="2" Grid.Row="2" Background="Gray" Foreground="White"/>
-        <Button x:Name="OutButton" Content="Выход из приложения" Click="OutButton_Click"
-            Grid.Column="0" Grid.Row="2" Background="Gray" Foreground="White"/>
+
+        <!-- Заголовок -->
+        <TextBlock Text="Поиск книг" FontSize="20" FontWeight="Bold" 
+                   Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                   HorizontalAlignment="Center" Margin="0,0,0,15"/>
+
+        <!-- Базовый поиск -->
+        <GroupBox Header="Базовый поиск" Grid.Row="1" Grid.Column="0" Margin="5">
+            <StackPanel Margin="10">
+                <TextBlock Text="Поиск по названию, автору или жанру:"/>
+                <TextBox x:Name="SearchTextBox" Height="25" Margin="0,5,0,10"/>
+                <Button x:Name="BasicSearchButton" Content="Найти" 
+                        Click="BasicSearchButton_Click" Height="30" 
+                        Background="#FF0080FF" Foreground="White"/>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Расширенный поиск -->
+        <GroupBox Header="Расширенный поиск" Grid.Row="1" Grid.Column="1" Margin="5">
+            <StackPanel Margin="10">
+                <TextBlock Text="Жанр:"/>
+                <TextBox x:Name="GenreFilterTextBox" Height="25" Margin="0,5,0,10"/>
+
+                <TextBlock Text="Год издания от:"/>
+                <TextBox x:Name="YearFromTextBox" Height="25" Margin="0,5,0,10" 
+                         PreviewTextInput="NumberValidationTextBox"/>
+
+                <TextBlock Text="Год издания до:"/>
+                <TextBox x:Name="YearToTextBox" Height="25" Margin="0,5,0,10" 
+                         PreviewTextInput="NumberValidationTextBox"/>
+
+                <Button x:Name="AdvancedSearchButton" Content="Расширенный поиск" 
+                        Click="AdvancedSearchButton_Click" Height="30" 
+                        Background="#FF8000" Foreground="White"/>
+            </StackPanel>
+        </GroupBox>
+
+        <!-- Кнопки управления -->
+        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
+                    Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+            <Button x:Name="ClearSearchButton" Content="Очистить поиск" 
+                    Click="ClearSearchButton_Click" Margin="5" Padding="10,5"/>
+            <Button x:Name="ShowAllButton" Content="Показать все книги" 
+                    Click="ShowAllButton_Click" Margin="5" Padding="10,5"/>
+        </StackPanel>
+
+        <!-- Результаты поиска -->
+        <GroupBox Header="Результаты поиска" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="5">
+            <ListBox x:Name="SearchResultsListBox" Margin="5">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="LightGray" BorderThickness="0,0,0,1" Padding="10,8">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="14" 
+                               Foreground="#FF2C3E50" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding Author}" FontSize="12" Foreground="#FF3498DB" 
+                               Margin="0,2,0,0"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                    <Border Background="#FFECF0F1" Padding="5,2" CornerRadius="3">
+                                        <TextBlock Text="{Binding Genre}" FontSize="11" 
+                                      Foreground="#FF27AE60" FontWeight="SemiBold"/>
+                                    </Border>
+                                    <Border Background="#FFF5F5F5" Padding="5,2" CornerRadius="3" 
+                                Margin="10,0,0,0">
+                                        <TextBlock Text="{Binding Dateisd}" FontSize="11" 
+                                      Foreground="#FF7F8C8D" FontWeight="SemiBold"/>
+                                    </Border>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+             </ListBox>
+        </GroupBox>
+
+        <!-- Статистика и навигация -->
+        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" 
+                    Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+            <TextBlock x:Name="ResultsCountTextBlock" Margin="0,0,20,0" 
+                       VerticalAlignment="Center" FontWeight="Bold"/>
+            <Button x:Name="ExitButton" Content="Вернуться в меню" 
+                    Click="ExitButton_Click" Margin="5" Padding="10,5" 
+                    Background="Gray" Foreground="White"/>
+            <Button x:Name="OutButton" Content="Выход из приложения" 
+                    Click="OutButton_Click" Margin="5" Padding="10,5" 
+                    Background="DarkRed" Foreground="White"/>
+        </StackPanel>
     </Grid>
 </Window>

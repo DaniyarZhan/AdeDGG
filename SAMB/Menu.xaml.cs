@@ -19,10 +19,47 @@ namespace SAMB
     /// </summary>
     public partial class Menu : Window
     {
+        private User currentUser;
+
         public Menu()
         {
             InitializeComponent();
+
+            // Получаем текущего пользователя
+            if (Application.Current.Properties["CurrentUser"] is User user)
+            {
+                currentUser = user;
+                UpdateUIForUserRole();
+            }
         }
+
+        private void UpdateUIForUserRole()
+        {
+            // Обновляем заголовок с информацией о пользователе
+            Title = $"Главное меню - {currentUser.Login} ({currentUser.Role})";
+
+            // Скрываем кнопки в зависимости от роли
+            if (currentUser.IsGuest())
+            {
+                AddButton.Visibility = Visibility.Collapsed;
+                AddClientButton.Visibility = Visibility.Collapsed;
+                RemoveButton.Visibility = Visibility.Collapsed;
+
+                // Показываем сообщение для гостя
+                var guestText = new TextBlock
+                {
+                    Text = "Режим гостя: доступен только просмотр и поиск книг",
+                    Foreground = Brushes.Blue,
+                    FontWeight = FontWeights.Bold,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    Margin = new Thickness(0, 10, 0, 0)
+                };
+
+                // Добавляем сообщение в StackPanel
+                MainStackPanel.Children.Insert(0, guestText);
+            }
+        }
+                      
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {

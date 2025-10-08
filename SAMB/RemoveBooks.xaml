@@ -6,22 +6,72 @@
         xmlns:local="clr-namespace:SAMB"
         mc:Ignorable="d"
         Title="Удаление книг" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <Grid Margin="10">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <UniformGrid Grid.Row="1" Grid.Column="1" Columns="1">            
-        </UniformGrid>
-        <Button x:Name="ExitButton" Content="Вернуться на прошлую страницу" Click="ExitButton_Click" 
-            Grid.Column="2" Grid.Row="2" Background="Gray" Foreground="White"/>
-        <Button x:Name="OutButton" Content="Выход из приложения" Click="OutButton_Click" 
-            Grid.Column="0" Grid.Row="2" Background="Gray" Foreground="White"/>
+
+        <!-- Заголовок -->
+        <TextBlock x:Name="TitleTextBlock" Text="Удаление книг" 
+                   FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" 
+                   Grid.Row="0" Margin="0,0,0,15"/>
+
+        <!-- Список книг с кнопками удаления -->
+        <GroupBox Header="Список книг для удаления" Grid.Row="1" Margin="5">
+            <ListBox x:Name="BooksListBox" Margin="5">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="LightGray" BorderThickness="0,0,0,1" Padding="10,8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Информация о книге -->
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="14" 
+                                               Foreground="#FF2C3E50" TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Author}" FontSize="12" Foreground="#FF3498DB" 
+                                               Margin="0,2,0,0"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                        <Border Background="#FFECF0F1" Padding="5,2" CornerRadius="3">
+                                            <TextBlock Text="{Binding Genre}" FontSize="11" 
+                                                      Foreground="#FF27AE60" FontWeight="SemiBold"/>
+                                        </Border>
+                                        <Border Background="#FFF5F5F5" Padding="5,2" CornerRadius="3" 
+                                                Margin="10,0,0,0">
+                                            <TextBlock Text="{Binding Dateisd}" FontSize="11" 
+                                                      Foreground="#FF7F8C8D" FontWeight="SemiBold"/>
+                                        </Border>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <!-- Кнопка удаления -->
+                                <Button x:Name="DeleteButton" Content="Удалить" Grid.Column="1"
+                                        Click="DeleteButton_Click" Margin="10,0,0,0" Padding="15,5"
+                                        Background="#FFE74C3C" Foreground="White" FontWeight="Bold"
+                                        Tag="{Binding}"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+
+        <!-- Статистика и навигация -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" 
+                    HorizontalAlignment="Center" Margin="0,10">
+            <TextBlock x:Name="BooksCountTextBlock" Margin="0,0,20,0" 
+                       VerticalAlignment="Center" FontWeight="Bold"/>
+            <Button x:Name="ExitButton" Content="Вернуться в меню" 
+                    Click="ExitButton_Click" Margin="5" Padding="10,5" 
+                    Background="Gray" Foreground="White"/>
+            <Button x:Name="OutButton" Content="Выход из приложения" 
+                    Click="OutButton_Click" Margin="5" Padding="10,5" 
+                    Background="DarkRed" Foreground="White"/>
+        </StackPanel>
     </Grid>
 </Window>

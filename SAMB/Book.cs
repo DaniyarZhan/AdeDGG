@@ -12,6 +12,7 @@ namespace SAMB
         public string Author { get; set; }
         public string Genre { get; set; }
         public string Dateisd { get; set; }
+        public Book() { }
         public Book(string name,  string genre, string author, string date)
         {
             Name = name;

@@ -19,9 +19,17 @@ namespace SAMB
         private string login;
         private string password;
         private readonly string fileName = "user.json";
+        private UserManager userManager = new UserManager();
         public MainWindow()
         {
             InitializeComponent();
+            userManager.Load();
+            if (userManager.Users.Count == 0)
+            {
+                userManager.AddUser(new User("admin", "admin", "Библиотекарь"));
+                userManager.AddUser(new User("guest", "guest", "Гость"));
+                userManager.Save();
+            }
         }
 
         private void RegistrationButton_Click(object sender, RoutedEventArgs e)
@@ -31,21 +39,32 @@ namespace SAMB
             if (string.IsNullOrEmpty(login) && string.IsNullOrEmpty(password))
             {
                 MessageBox.Show("Введите данные");
+                return;
             }
             else if (string.IsNullOrEmpty(login))
             {
                 MessageBox.Show("Введите логин");
+                return;
             }
             else if (string.IsNullOrEmpty(password))
             {
                 MessageBox.Show("Введите пароль");
-            }
-            else
+                return;
+            }            
+            var user = userManager.FindUser(login, password);
+            if (user != null)
             {
+                // Сохраняем текущего пользователя в App свойствах
+                Application.Current.Properties["CurrentUser"] = user;
+
                 Menu menu = new Menu();
                 menu.Show();
                 this.Close();
-            }                
+            }
+            else
+            {
+                MessageBox.Show("Неверный логин или пароль");
+            }
         }
     }
 }

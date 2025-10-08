@@ -7,18 +7,16 @@
         mc:Ignorable="d"
         Title="Меню" 
         MinHeight="450" MinWidth="800" MaxHeight="650" MaxWidth="1000">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <Grid Margin="20">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <UniformGrid Grid.Row="1" Grid.Column="1" Columns="1">
+        <TextBlock x:Name="UserInfoTextBlock" Text="Главное меню" 
+                   FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" 
+                   Grid.Row="0" Margin="0,0,0,20"/>
+        <StackPanel x:Name="MainStackPanel" Grid.Row="1" >
             <Button x:Name="SearchButton" Content="Поиск современных книг" 
                     Click="SearchButton_Click" Margin="5" Background="Aqua" Foreground="Firebrick" FontSize="18"/>
             <Button x:Name="AddButton" Content="Добавление современных книг" 
@@ -27,7 +25,7 @@
                     Click="RemoveButton_Click" Margin="5" Background="Aqua" Foreground="Firebrick" FontSize="18"/>
             <Button x:Name="AddClientButton" Content="Добавление пользователя" Click="AddClientButton_Click"
                     Margin="5" Background="Aqua" Foreground="Firebrick" FontSize="18"/>
-        </UniformGrid>
+        </StackPanel>
         <Button x:Name="ExitButton" Content="Вернуться на прошлую страницу" Click="ExitButton_Click" 
             Grid.Column="2" Grid.Row="2" Background="Gray" Foreground="White"/>
         <Button x:Name="OutButton" Content="Выход из приложения" Click="OutButton_Click" 
